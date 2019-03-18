@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace FirstConsole
@@ -16,13 +17,20 @@ namespace FirstConsole
 
         static void Main(string[] args)
         {
+            string name = "";
+            //name.end
+
+
             var operators = new List<string>
                 {
                     "gt",
                     "lt",
                     "gte",
                     "lte",
-                    "eq"
+                    "eq",
+                    "ct",
+                    "sw",
+                    "ew"
                 };
 
             Console.WriteLine("Unesi vrijednost parametra:");
@@ -82,17 +90,19 @@ namespace FirstConsole
 
             // x.PropertyName
             var propExpression = Expression.Property(parameter, propertyName);
-
+            // Vraca tip property
             var type = propExpression.Type;
+            //Konvertuje string u tip promjenljive
             var convertedValue = Convert.ChangeType(value, type);
-
+            //Sadrzi vrijednost tipa promjenljive
             var constant = Expression.Constant(convertedValue);
-
+            
             BinaryExpression binary;
+
             switch (convertedValue)
             {
                 case string _:
-                    binary = GetBinaryExpressionForString(op, propExpression, constant);
+                    binary =  GetBinaryExpressionForString(op, propExpression, constant);
                     break;
                 case int _:
                     binary = GetBinaryExpressionForInt(op, propExpression, constant);
@@ -118,50 +128,90 @@ namespace FirstConsole
                     return Expression.LessThanOrEqual(propExpression, constant);
                 case "eq":
                     return Expression.Equal(propExpression, constant);
+                
                 default:
                     throw new InvalidOperationException($"Neocekivani operator {op}");
             }
         }
 
-        private static BinaryExpression GetBinaryExpressionForString(string op, MemberExpression propExpression, ConstantExpression constant)
+        //private static BinaryExpression GetBinaryExpressionForString(string op, MemberExpression propExpression, ConstantExpression constant)
+        //{
+        //    BinaryExpression bin;
+
+        //    switch (op)
+        //    {
+        //        case "eq":
+        //            MethodInfo methodInfo = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+        //            var contains = Expression.Call(propExpression, methodInfo, constant);
+        //        default:
+        //            throw new InvalidOperationException($"Neocekivani operator {op}");
+        //    }
+        //}
+
+        private static BinaryExpression GetBinaryExpressionForString(string op, MemberExpression propExpression,
+            ConstantExpression constant)
         {
+            var trueExpression = Expression.Constant(true, typeof(bool));
+            BinaryExpression bin;
+
             switch (op)
             {
                 case "eq":
                     return Expression.Equal(propExpression, constant);
-                default:
-                    throw new InvalidOperationException($"Neocekivani operator {op}");
-            }
-        }
+                case "ct":
+                    MethodInfo methodInfo1 = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                    var contains = Expression.Call(propExpression, methodInfo1, constant);
+                    bin = Expression.Equal(contains, trueExpression);
+                    break;
 
-        private static Expression<Func<int, bool>> GetWhereExpression(string op, int constant)
-        {
-            // num =>
-            ParameterExpression numParam = Expression.Parameter(typeof(int), "num");
+                case "sw":
+                    MethodInfo methodInfo2 = typeof(string).GetMethod("StartsWith", new[] { typeof(string) });
+                    var startsWith = Expression.Call(propExpression, methodInfo2, constant);
+                    bin = Expression.Equal(startsWith, trueExpression);
+                    break;
 
-            // n
-            ConstantExpression constPar = Expression.Constant(constant, typeof(int));
+                case "ew":
+                    MethodInfo methodInfo3 = typeof(string).GetMethod("EndsWith", new[] { typeof(string) });
+                    var endsWith = Expression.Call(propExpression, methodInfo3, constant);
+                    bin = Expression.Equal(endsWith, trueExpression);
+                    break;
 
-            BinaryExpression binExp;
-            switch (op)
-            {
-                case "gt":
-                    binExp = Expression.GreaterThan(numParam, constPar);
-                    break;
-                case "lt":
-                    binExp = Expression.LessThan(numParam, constPar);
-                    break;
-                case "gte":
-                    binExp = Expression.GreaterThanOrEqual(numParam, constPar);
-                    break;
-                case "lte":
-                    binExp = Expression.LessThanOrEqual(numParam, constPar);
-                    break;
                 default:
                     throw new InvalidOperationException($"Neocekivani operator {op}");
             }
 
-            return Expression.Lambda<Func<int, bool>>(binExp, numParam);
+            return bin;
         }
+        
+
+        //private static Expression<Func<int, bool>> GetWhereExpression(string op, int constant)
+        //{
+        //    // num =>
+        //    ParameterExpression numParam = Expression.Parameter(typeof(int), "num");
+
+        //    // n
+        //    ConstantExpression constPar = Expression.Constant(constant, typeof(int));
+
+        //    BinaryExpression binExp;
+        //    switch (op)
+        //    {
+        //        case "gt":
+        //            binExp = Expression.GreaterThan(numParam, constPar);
+        //            break;
+        //        case "lt":
+        //            binExp = Expression.LessThan(numParam, constPar);
+        //            break;
+        //        case "gte":
+        //            binExp = Expression.GreaterThanOrEqual(numParam, constPar);
+        //            break;
+        //        case "lte":
+        //            binExp = Expression.LessThanOrEqual(numParam, constPar);
+        //            break;
+        //        default:
+        //            throw new InvalidOperationException($"Neocekivani operator {op}");
+        //    }
+
+        //    return Expression.Lambda<Func<int, bool>>(binExp, numParam);
+        //}
     }
 }
