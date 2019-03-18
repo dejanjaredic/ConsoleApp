@@ -26,6 +26,7 @@ namespace FirstConsole
             
 
             // ANDREJ SMARAS 
+            // whaaaaat
 
 
             var operators = new List<string>
