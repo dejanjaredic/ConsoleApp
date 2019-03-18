@@ -23,7 +23,7 @@ namespace FirstConsole
             // joooooo
             //jjjjjjj
             //Sofijaaaaa
-
+            // Hocu da koristim powershell
             string name = "";
             string o = "";
             //jjjj
