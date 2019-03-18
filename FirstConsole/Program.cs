@@ -25,6 +25,7 @@ namespace FirstConsole
 
             string name = "";
             string o = "";
+            //jjjj
             
 
             // ANDREJ SMARAS 
