@@ -17,8 +17,12 @@ namespace FirstConsole
 
         static void Main(string[] args)
         {
+
+            // DEJO SMARAS //
+            // smaras//
+
             string name = "";
-            //name.end
+            
 
             // ANDREJ SMARAS 
 
