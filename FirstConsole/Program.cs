@@ -18,6 +18,8 @@ namespace FirstConsole
         static void Main(string[] args)
         {
             //Jedan Komentar
+            //Drugi Komentar
+
             var operators = new List<string>
                 {
                     "gt",
