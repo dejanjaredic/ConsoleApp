@@ -19,6 +19,7 @@ namespace FirstConsole
         {
             //Jedan Komentar
             //Drugi Komentar
+            //Sedmi k0mentar
 
             var operators = new List<string>
                 {
