@@ -19,7 +19,7 @@ namespace FirstConsole
         {
             string name = "";
             //name.end
-
+            // Dejo smaras i dalje
 
             var operators = new List<string>
                 {
