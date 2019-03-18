@@ -20,9 +20,13 @@ namespace FirstConsole
 
             // DEJO SMARAS //
             // smaras//
+            // joooooo
             //jjjjjjj
+            //Sofijaaaaa
 
             string name = "";
+            string o = "";
+            //jjjj
             
 
             // ANDREJ SMARAS 
