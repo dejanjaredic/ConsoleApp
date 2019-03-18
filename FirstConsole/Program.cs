@@ -18,12 +18,15 @@ namespace FirstConsole
         static void Main(string[] args)
         {
 
-            //Smartate oboje
+            // DEJO SMARAS //
+            // smaras//
+            //jjjjjjj
 
             string name = "";
             
 
             // ANDREJ SMARAS 
+            // whaaaaat
 
 
             var operators = new List<string>
