@@ -20,10 +20,13 @@ namespace FirstConsole
 
             // DEJO SMARAS //
             // smaras//
-            // joooooo
+            //jjjjjjj
 
             string name = "";
             
+
+            // ANDREJ SMARAS 
+            // whaaaaat
 
 
             var operators = new List<string>
