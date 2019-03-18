@@ -18,21 +18,6 @@ namespace FirstConsole
         static void Main(string[] args)
         {
 
-            // DEJO SMARAS //
-            // smaras//
-            // joooooo
-            //jjjjjjj
-            //Sofijaaaaa
-            // Hocu da koristim powershell
-            string name = "";
-            string o = "";
-            //jjjj
-            
-
-            // ANDREJ SMARAS 
-            // whaaaaat
-
-
             var operators = new List<string>
                 {
                     "gt",
