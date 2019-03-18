@@ -17,8 +17,11 @@ namespace FirstConsole
 
         static void Main(string[] args)
         {
+
+            // DEJO SMARAS //
+
             string name = "";
-            //name.end
+            
 
 
             var operators = new List<string>
