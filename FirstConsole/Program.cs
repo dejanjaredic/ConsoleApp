@@ -18,8 +18,7 @@ namespace FirstConsole
         static void Main(string[] args)
         {
 
-            // DEJO SMARAS //
-            // smaras//
+            //Smartate oboje
 
             string name = "";
             
